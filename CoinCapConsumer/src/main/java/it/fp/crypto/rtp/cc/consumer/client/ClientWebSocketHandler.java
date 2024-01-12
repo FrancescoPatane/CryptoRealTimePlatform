@@ -26,7 +26,7 @@ public class ClientWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
-        logger.info("Client received: {}", message);
+        logger.info("Client received: {}", message.getPayload());
     }
 
     @Override
