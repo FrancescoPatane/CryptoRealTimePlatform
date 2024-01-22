@@ -16,7 +16,7 @@ public class CoinCapConsumer {
 	  @Autowired
 	  private PricesProducer producer;
 
-	    @KafkaListener(topics = KafkaConstants.TOPIC_NAME, groupId = KafkaConstants.GROUP_ID)
+	    @KafkaListener(topics = KafkaConstants.PRICES_TOPIC_NAME, groupId = KafkaConstants.CONSUMERS_GROUP_ID)
 	    public void consume(String message){
 	        logger.info(String.format("Message received -> %s", message));
 	        this.producer.sendToSocket(message);

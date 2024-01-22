@@ -10,7 +10,7 @@ public class KafkaTopicConfig {
 	
     @Bean
     public NewTopic cryptoTopic(){
-        return TopicBuilder.name(KafkaConstants.TOPIC_NAME)
+        return TopicBuilder.name(KafkaConstants.PRICES_TOPIC_NAME)
         		.partitions(1)
                 .replicas(1)
                 .build();
