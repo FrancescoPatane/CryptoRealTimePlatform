@@ -15,11 +15,15 @@ public class CoinCapConsumer {
 	  
 	  @Autowired
 	  private PricesProducer producer;
+	  
+	  @Autowired
+	  private TsProducer tsProducer;
 
 	    @KafkaListener(topics = KafkaConstants.PRICES_TOPIC_NAME, groupId = KafkaConstants.CONSUMERS_GROUP_ID)
 	    public void consume(String message){
-	        logger.info(String.format("Message received -> %s", message));
-	        this.producer.sendToSocket(message);
+	        logger.info("Message received - {}", message);
+	        this.tsProducer.convertPricesDataAndSend(message);
+//	        this.producer.sendToSocket(message);
 	    }
 
 }

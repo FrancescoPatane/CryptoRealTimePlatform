@@ -16,7 +16,6 @@ public class KafkaProducer {
 
     public void sendMessage(String message){
         LOGGER.info(String.format("Sending message -> %s", message));
-//        message = "{ \"value1\": 1.0, \"value2\": 2, \"value3\": 3.33 }";
         kafkaTemplate.send(KafkaConstants.TOPIC_NAME, message);
         LOGGER.info(String.format("Message sent -> %s", message));
     }
