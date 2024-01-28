@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.TimeSeries;
 
-@Document("prices")
+//@Document("prices")
+@TimeSeries(collection="prices", timeField = "timestamp")
 public class Price {
 	
 	private Date time;
