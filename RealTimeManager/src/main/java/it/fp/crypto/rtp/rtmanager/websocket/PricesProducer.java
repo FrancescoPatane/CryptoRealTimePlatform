@@ -16,38 +16,39 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Controller
+//@Controller
 public class PricesProducer {
 	
 	  private static final Logger logger = LoggerFactory.getLogger(PricesProducer.class);
 	  
 	  public static final ObjectMapper mapper = new ObjectMapper();
 	  
-		private SimpMessagingTemplate template;
+//		private SimpMessagingTemplate template;
+//
+//		@Autowired
+//		public PricesProducer(SimpMessagingTemplate template) {
+//			this.template = template;
+//		}
 
-		@Autowired
-		public PricesProducer(SimpMessagingTemplate template) {
-			this.template = template;
-		}
-
-	    public void sendToSocket(String message){
-	        logger.info(String.format("Message received -> %s", message));
-
-	    	try {
-				Map<String, String> jsonMessageIn = mapper.readValue(message, new TypeReference<Map<String, String>>(){});
-				Map<String, Object> jsonMessageOut = new HashMap<>(jsonMessageIn.size()+1);
-				jsonMessageOut.put("time", new Date());
-				jsonMessageIn.forEach((k,v) -> jsonMessageOut.put(k, new BigDecimal(v)));
-				String out = mapper.writeValueAsString(jsonMessageOut);
-		        GenericMessage<byte[]> messageOut = new GenericMessage<>(out.getBytes());
-		        logger.info(String.format("Message prepared and sent to ws -> %s", out));
-			    template.send("/prices/rt", messageOut);
-	    	} catch (JsonProcessingException e) {
-				logger.error("Could not read message {}", message);
-				logger.error(e.getMessage(), e);
-			}
-	       
-
-	    }
+//	    public void sendToSocket(String message){
+//	        logger.info(String.format("Message received -> %s", message));
+//
+//	    	try {
+//				Map<String, String> jsonMessageIn = mapper.readValue(message, new TypeReference<Map<String, String>>(){});
+//				Map<String, Object> jsonMessageOut = new HashMap<>(jsonMessageIn.size()+1);
+//				jsonMessageOut.put("time", new Date());
+//				jsonMessageIn.forEach((k,v) -> jsonMessageOut.put(k, new BigDecimal(v)));
+//				String out = mapper.writeValueAsString(jsonMessageOut);
+//		        GenericMessage<byte[]> messageOut = new GenericMessage<>(out.getBytes());
+//		        logger.info(String.format("Message prepared and sent to ws -> %s", out));
+//			    template.send("/prices/rt", messageOut);
+//			    
+//	    	} catch (JsonProcessingException e) {
+//				logger.error("Could not read message {}", message);
+//				logger.error(e.getMessage(), e);
+//			}
+//	       
+//
+//	    }
 
 }

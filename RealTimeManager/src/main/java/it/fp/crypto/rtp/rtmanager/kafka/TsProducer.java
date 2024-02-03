@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.fp.crypto.rtp.rtmanager.dto.PriceTsDto;
+import it.fp.crypto.rtp.rtmanager.websocket.PricesWebSocketServer;
 
 
 @Component
@@ -28,6 +29,8 @@ public class TsProducer {
 	@Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
+	  @Autowired
+	  private PricesWebSocketServer socketServer;
 
 	public void convertPricesDataAndSend(String message) {
 		try {
@@ -44,7 +47,8 @@ public class TsProducer {
 	private void sendPriceTs(PriceTsDto dto) {
 		logger.info("Sending message - {}", dto.toString());
         try {
-			kafkaTemplate.send(KafkaConstants.PRICES_TS_TOPIC_NAME, mapper.writeValueAsString(dto));
+	        this.socketServer.broadcast(mapper.writeValueAsString(dto));
+//			kafkaTemplate.send(KafkaConstants.PRICES_TS_TOPIC_NAME, mapper.writeValueAsString(dto));
 		} catch (JsonProcessingException e) {
 			logger.error(e.getMessage(), e);
 		}

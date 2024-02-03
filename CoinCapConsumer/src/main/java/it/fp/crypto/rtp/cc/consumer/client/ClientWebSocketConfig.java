@@ -15,7 +15,7 @@ public class ClientWebSocketConfig {
         WebSocketConnectionManager manager = new WebSocketConnectionManager(
                 webSocketClient(),
                 webSocketHandler(),
-                "wss://ws.coincap.io/prices?assets=bitcoin,ethereum,tether,binance-coin,solana"
+                "wss://ws.coincap.io/prices?assets=bitcoin,ethereum,binance-coin,bitcoin-cash,litecoin"
         );
         manager.setAutoStartup(true);
         return manager;
