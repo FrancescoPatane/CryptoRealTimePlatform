@@ -1,9 +1,8 @@
 package it.fp.crypto.rtp.rtmanager.kafka;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
-import java.math.BigDecimal;
-import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +35,7 @@ public class TsProducer {
 		try {
 			Map<String, String> jsonMessage = mapper.readValue(message, new TypeReference<Map<String, String>>(){});
 			Date now = new Date();
-			
 			jsonMessage.forEach((k, v) -> this.sendPriceTs(new PriceTsDto(now, new BigDecimal(v), k)));
-			
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -47,8 +44,9 @@ public class TsProducer {
 	private void sendPriceTs(PriceTsDto dto) {
 		logger.info("Sending message - {}", dto.toString());
         try {
-	        this.socketServer.broadcast(mapper.writeValueAsString(dto));
-//			kafkaTemplate.send(KafkaConstants.PRICES_TS_TOPIC_NAME, mapper.writeValueAsString(dto));
+        	String json = mapper.writeValueAsString(dto);
+	        this.socketServer.broadcast(json);
+			kafkaTemplate.send(KafkaConstants.PRICES_TS_TOPIC_NAME, json);
 		} catch (JsonProcessingException e) {
 			logger.error(e.getMessage(), e);
 		}

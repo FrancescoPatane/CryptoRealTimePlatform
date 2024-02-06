@@ -23,7 +23,7 @@ public class PriceRepository {
 	
 	public void insert(Price p) {
 		this.mt.insert(p);
-		logger.info("Added {} - {} - {}", p.getCurrency(), p.getTime(), p.getPrice());
+		logger.info("Added {} - {} - {}", p.getAsset(), p.getTime(), p.getPrice());
 	}
 	
 	public List<Price> findAll(){
@@ -32,7 +32,7 @@ public class PriceRepository {
 	
 	public List<Price> findByAsset(String asset){
 		Query query = new Query();
-		query.addCriteria(Criteria.where("currency").is(asset));
+		query.addCriteria(Criteria.where("asset").is(asset));
 		return this.mt.find(query, Price.class);
 	}
 

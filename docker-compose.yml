@@ -41,6 +41,7 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
+
   grafana:
     image: grafana/grafana-enterprise
     container_name: grafana
@@ -50,7 +51,3 @@ services:
       - GF_LOG_LEVEL=info
     ports:
       - '3000:3000'
-    #volumes:
-    #  - 'grafana_storage:/var/lib/grafana'
-#volumes:
-#  grafana_storage: {}

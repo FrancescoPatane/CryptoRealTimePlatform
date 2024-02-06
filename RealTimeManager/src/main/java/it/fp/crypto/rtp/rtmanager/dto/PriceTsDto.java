@@ -7,13 +7,13 @@ public class PriceTsDto {
 	
 	private Date time;
 	private BigDecimal price;
-	private String currency;
+	private String asset;
 	
-	public PriceTsDto(Date time, BigDecimal price, String currency) {
+	public PriceTsDto(Date time, BigDecimal price, String asset) {
 		super();
 		this.time = time;
 		this.price = price;
-		this.currency = currency;
+		this.asset = asset;
 	}
 
 	public Date getTime() {
@@ -24,13 +24,13 @@ public class PriceTsDto {
 		return price;
 	}
 
-	public String getCurrency() {
-		return currency;
+	public String getAsset() {
+		return asset;
 	}
 
 	@Override
 	public String toString() {
-		return "PriceTsDto [time=" + time + ", price=" + price + ", currency=" + currency + "]";
+		return "PriceTsDto [time=" + time + ", price=" + price + ", asset=" + asset + "]";
 	}
 	
 	
