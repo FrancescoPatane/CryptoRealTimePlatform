@@ -20,9 +20,6 @@ public class ClientWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         logger.info("Client connection opened id {}", session.getId());
-//        TextMessage message = new TextMessage("one-time message from client");
-//        logger.info("Client sends: {}", message);
-//        session.sendMessage(message);
     }
 
     @Override
